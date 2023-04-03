@@ -21,9 +21,10 @@ var rng = Random();
 bool useRawKeyboard = true;
 
 List<Effect> boule = [ // les différent types de boule
-  Effect((int value) => value >0 && value <= 30, 1, Colors.red),
-  Effect((int value) => value >30 && value <= 70, 2, Colors.orange),
-  Effect((int value) => value >70 && value <= 100, 3, Colors.white),
+  Effect((int value) => value >0 && value <= 20, 1, Colors.red),
+  Effect((int value) => value >20 && value <= 40, 2, Colors.orange),
+  Effect((int value) => value >40 && value <= 60, 3, Colors.white),
+  Effect((int value) => value >60 && value <= 100, 0, Colors.blue),
 ];
 
 void main() async {
@@ -194,7 +195,7 @@ class _SnakeGameState extends State<SnakeGame> {
             add(direction2, snake);
           }
           if (effect.eat==2) { // deuxième effect : on va moins vite
-            duration2 = duration2+const Duration(milliseconds: 100);
+            duration2 = duration2+const Duration(milliseconds: 10);
           }         
           if (effect.eat==3) { // deuxième effect : on va encore plus vite
             duration2 = duration2*0.9;
