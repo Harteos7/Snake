@@ -146,7 +146,7 @@ class _SnakeGameState extends State<SnakeGame> {
     snakeTime(); // le timer du jeu
   }
   
-  int change() {
+  int change() { // pour relancer la valeur random
     int randomNumber = rng.nextInt(101);
     return randomNumber;
   }
