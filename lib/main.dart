@@ -218,7 +218,7 @@ class _SnakeGameState extends State<SnakeGame> {
       else 
       { // vérification pour food et effect
         createFood(); // we multiply the bread
-        if ((snake.length - 2)<20) {
+        if ((snake.length - 2)<26) {
         duration2 = duration2 * (0.8 + randomGen.nextDouble() * (0.95 - 0.8)); // speed increase about 10 %
         }
         boule.forEach((effect) {
