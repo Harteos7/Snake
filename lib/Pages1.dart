@@ -85,6 +85,7 @@ class Enregistrer extends StatelessWidget {
                         firestore.collection(platform.toString()).add({
                           'name': name,
                           'score': score,
+                          "timestamp": Timestamp.now(),
                         });
                         scoredef = false;
                         notseed = false;
