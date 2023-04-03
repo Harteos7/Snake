@@ -15,21 +15,18 @@ const apiKey = 'AIzaSyBUiuITIqoTjhhIKaUfyvzaGgqREvMoGow';
 const projectId = 'snake-1fdc7';
 bool reseau = true ;
 bool test = false;
-var isPlaying = false; // var for the game
-var scoredef = false; // var for the score
-var notseed = true; // cette variable est utiliser pour vérifier que l'on n'a pas deja envoyer les resultats
-TargetPlatform platform = defaultTargetPlatform; // savoir sur qu'elle plateform on est
-var appop;
-var rng = Random();
 bool useRawKeyboard = true;
 final int squaresPerRow = 10;
 final int squaresPerCol = 20;
 final fontStyle = const TextStyle(color: Colors.white, fontSize: 20);
 final randomGen = Random();
-String? _message; // the keyboard Listener
 var duration = const Duration(milliseconds: 500); // 1er valeur du timer
 var duration2 = const Duration(milliseconds: 500); // nouvelle valeur du timer quand le snake mange
-String MessageEnd = 'rien'; // message de fin
+var appop;
+var rng = Random();
+var isPlaying = false; // var for the game
+var scoredef = false; // var for the score
+var notseed = true; // cette variable est utiliser pour vérifier que l'on n'a pas deja envoyer les resultats
 var food = [0, 2];
 var direction = 'up'; // first direction 
 var direction2 = 'up'; // pour garder en mémoire la derniére direction
@@ -38,6 +35,10 @@ var snake = [
   [0, 1],
   [0, 0]
 ];
+TargetPlatform platform = defaultTargetPlatform; // savoir sur qu'elle plateform on est
+String? _message; // the keyboard Listener
+String MessageEnd = 'rien'; // message de fin
+
 List<Effect> boule = [ // les différent types de boule
 Effect((int value) => value >=0 && value <= 20, [() => add(direction2, snake)], Colors.red),
 Effect((int value) => value >20 && value <= 40, [() => duration2 = duration2+const Duration(milliseconds: 30)], Colors.orange),
