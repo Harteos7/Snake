@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\04 apk\01 windows snake\build\windows\CMakeFiles\1a5e55584369bed5bb11bd1685ec4b02\INSTALL_force.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{259486F7-F550-306E-BC3B-4DF541705DB8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,49 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "C:/04 apk/flutter_application/build/windows/_deps/nuget-subbuild/CMakeFiles/nuget-populate"
+		},
+		{
+			"file" : "C:/04 apk/flutter_application/build/windows/_deps/nuget-subbuild/CMakeFiles/f283ce9f101bbeeef49ef1da4f303e66/nuget-populate.rule"
+		},
+		{
+			"file" : "C:/04 apk/flutter_application/build/windows/_deps/nuget-subbuild/CMakeFiles/e40ef969b7149bbacc98c7e2ae5f08f7/nuget-populate-complete.rule"
+		},
+		{
+			"file" : "C:/04 apk/flutter_application/build/windows/_deps/nuget-subbuild/CMakeFiles/942558fdaba3f4f328d41ca1d0f70a42/nuget-populate-build.rule"
+		},
+		{
+			"file" : "C:/04 apk/flutter_application/build/windows/_deps/nuget-subbuild/CMakeFiles/942558fdaba3f4f328d41ca1d0f70a42/nuget-populate-configure.rule"
+		},
+		{
+			"file" : "C:/04 apk/flutter_application/build/windows/_deps/nuget-subbuild/CMakeFiles/942558fdaba3f4f328d41ca1d0f70a42/nuget-populate-copyfile.rule"
+		},
+		{
+			"file" : "C:/04 apk/flutter_application/build/windows/_deps/nuget-subbuild/CMakeFiles/942558fdaba3f4f328d41ca1d0f70a42/nuget-populate-download.rule"
+		},
+		{
+			"file" : "C:/04 apk/flutter_application/build/windows/_deps/nuget-subbuild/CMakeFiles/942558fdaba3f4f328d41ca1d0f70a42/nuget-populate-install.rule"
+		},
+		{
+			"file" : "C:/04 apk/flutter_application/build/windows/_deps/nuget-subbuild/CMakeFiles/942558fdaba3f4f328d41ca1d0f70a42/nuget-populate-mkdir.rule"
+		},
+		{
+			"file" : "C:/04 apk/flutter_application/build/windows/_deps/nuget-subbuild/CMakeFiles/942558fdaba3f4f328d41ca1d0f70a42/nuget-populate-patch.rule"
+		},
+		{
+			"file" : "C:/04 apk/flutter_application/build/windows/_deps/nuget-subbuild/CMakeFiles/942558fdaba3f4f328d41ca1d0f70a42/nuget-populate-test.rule"
+		},
+		{
+			"file" : "C:/04 apk/flutter_application/build/windows/_deps/nuget-subbuild/CMakeFiles/942558fdaba3f4f328d41ca1d0f70a42/nuget-populate-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"nuget-populate"
+		],
+		"name" : "nuget-populate"
+	}
+}

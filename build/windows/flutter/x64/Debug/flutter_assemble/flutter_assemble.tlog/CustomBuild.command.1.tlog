@@ -1,0 +1,28 @@
+^C:\04 APK\01 WINDOWS SNAKE\BUILD\WINDOWS\CMAKEFILES\C8654D8F44AE2C1CC6E56EB4E625477D\FLUTTER_WINDOWS.DLL.RULE
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E env "FLUTTER_ROOT=C:\03 Flutter\flutter" "PROJECT_DIR=C:\04 apk\01 windows snake" "FLUTTER_ROOT=C:\03 Flutter\flutter" "FLUTTER_EPHEMERAL_DIR=C:\04 apk\01 windows snake\windows\flutter\ephemeral" "PROJECT_DIR=C:\04 apk\01 windows snake" "FLUTTER_TARGET=C:\04 apk\01 windows snake\lib\main.dart" DART_DEFINES=RkxVVFRFUl9XRUJfQVVUT19ERVRFQ1Q9dHJ1ZQ== DART_OBFUSCATION=false TRACK_WIDGET_CREATION=true TREE_SHAKE_ICONS=false "PACKAGE_CONFIG=C:\04 apk\01 windows snake\.dart_tool\package_config.json" "C:/03 Flutter/flutter/packages/flutter_tools/bin/tool_backend.bat" windows-x64 Debug
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\04 APK\01 WINDOWS SNAKE\BUILD\WINDOWS\CMAKEFILES\1B442850FD2EA5EADCAC9D1952389E1B\FLUTTER_ASSEMBLE.RULE
+setlocal
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\04 APK\01 WINDOWS SNAKE\WINDOWS\FLUTTER\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" "-SC:/04 apk/01 windows snake/windows" "-BC:/04 apk/01 windows snake/build/windows" --check-stamp-file "C:/04 apk/01 windows snake/build/windows/flutter/CMakeFiles/generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
