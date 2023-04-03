@@ -39,6 +39,7 @@ dependencies:
   connectivity_plus: ^3.0.3
   fluent_ui: ^4.4.1
   cloud_firestore: ^4.4.4
+  url_launcher: ^6.0.10
 
 dev_dependencies:
   flutter_test:

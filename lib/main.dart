@@ -3,10 +3,12 @@ import 'package:flutter/services.dart';
 import 'dart:math';
 import 'dart:async';
 import 'dart:core';
+import 'package:flutter/gestures.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 import 'Pages1.dart';
 
 const apiKey = 'AIzaSyBUiuITIqoTjhhIKaUfyvzaGgqREvMoGow';
@@ -290,7 +292,7 @@ class _SnakeGameState extends State<SnakeGame> {
       MessageEnd = 'Pas si mal !';
     }
     if ((snake.length - 2) <= 25 && (snake.length - 2) > 20) {// message de fin
-      MessageEnd = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+      MessageEnd = 'Ha ?';
     }
     if ((snake.length - 2) <= 30 && (snake.length - 2) > 25) {// message de fin
       MessageEnd = 'Snake/20';
@@ -304,15 +306,47 @@ class _SnakeGameState extends State<SnakeGame> {
     if ((snake.length - 2) > 40) {// message de fin
       MessageEnd = 'GG';
     }
+    bool rick = false;
+
+    if (MessageEnd == 'Ha ?') {
+      rick = true;
+    }
 
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text(MessageEnd),
-          content: Text(
-            'Score: ${snake.length - 2}',
-            style: const TextStyle(fontSize: 20),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                'Score: ${snake.length - 2}',
+                style: const TextStyle(fontSize: 20),
+              ),
+              const SizedBox(height: 8),
+              rick ?
+              RichText(
+                text: TextSpan(
+                  children: [
+                    const TextSpan(text: 'rien à voir : '),
+                    TextSpan(
+                      text: 'clique pas !',
+                      style: const TextStyle(color: Colors.blue),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          if (MessageEnd == 'Ha ?') {
+                          launchUrlString('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
+                          }
+                        },
+                    ),
+                  ],
+                ),
+              ):
+              RichText(text: const TextSpan()
+              ),
+            ],
           ),
           actions: <Widget>[
             TextButton(
@@ -323,7 +357,7 @@ class _SnakeGameState extends State<SnakeGame> {
             ),
           ],
         );
-      }
+      },
     );
   }
 
@@ -500,7 +534,6 @@ class _SnakeGameState extends State<SnakeGame> {
 
                         // Récupérer les données triées de Firestore
                         var snapshot = await firestore.collection(platform.toString()).orderBy('score', descending: true).limit(7).get();
-                        print(snapshot);
 
                         // Stocker les données triées dans une liste de Map trier par la palteforme
                         List<Map<String, dynamic>?> sortedData = snapshot.docs.map((doc) {
