@@ -229,7 +229,7 @@ class _SnakeGameState extends State<SnakeGame> {
             add(direction2, snake);
           }
           if (effect.eat==2) { // deuxième effect : on va moins vite
-            duration2 = duration2+const Duration(milliseconds: 10);
+            duration2 = duration2+const Duration(milliseconds: 40);
           }         
           if (effect.eat==3) { // deuxième effect : on va encore plus vite
             duration2 = duration2*0.9;
