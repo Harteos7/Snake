@@ -40,7 +40,7 @@ String? _message; // the keyboard Listener
 String MessageEnd = 'rien'; // message de fin
 
 List<Effect> boule = [ // les différent types de boule
-Effect((int value) => value >=0 && value <= 20, [() => add(direction2, snake)], Colors.red),
+Effect((int value) => value >0 && value <= 20, [() => add(direction2, snake)], Colors.red), // le rouge ne peux pas apparaître dans les coins 
 Effect((int value) => value >20 && value <= 40, [() => duration2 = duration2+const Duration(milliseconds: 30)], Colors.orange),
 Effect((int value) => value >40 && value <= 60, [() => duration2 = duration2*0.95], Colors.white),
 Effect((int value) => value >60 && value <= 100, [() => print('')], Colors.blue),
@@ -244,6 +244,15 @@ class _SnakeGameState extends State<SnakeGame> {
         createFood();
       }
     }
+    boule.forEach((effect) {
+      if (effect.testCondition(randomNumber)) {
+        if (effect.color.toString()=='MaterialColor(primary value: Color(0xfff44336))') {
+          if (food == [0,0] || food == [squaresPerRow-1,squaresPerCol-1] || food == [0,squaresPerCol-1] || food == [squaresPerRow-1,0] ) {
+            createFood();
+          }
+        }
+      }
+    });
   }
 
   bool checkGameOver() { 
