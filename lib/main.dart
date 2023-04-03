@@ -258,7 +258,7 @@ class _SnakeGameState extends State<SnakeGame> {
       MessageEnd = 'Pas si mal !';
     }
     if ((snake.length - 2) <= 25 && (snake.length - 2) > 20) {
-      MessageEnd = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+      MessageEnd = 'dommage tu es sur windows';
     }
     if ((snake.length - 2) <= 30 && (snake.length - 2) > 25) {
       MessageEnd = 'Snake/20';
