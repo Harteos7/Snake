@@ -20,13 +20,43 @@ TargetPlatform platform = defaultTargetPlatform; // savoir sur qu'elle plateform
 var appop;
 var rng = Random();
 bool useRawKeyboard = true;
-
-List<Effect> boule = [ // les différent types de boule
-  Effect((int value) => value >0 && value <= 20, 1, Colors.red),
-  Effect((int value) => value >20 && value <= 40, 2, Colors.orange),
-  Effect((int value) => value >40 && value <= 60, 3, Colors.white),
-  Effect((int value) => value >60 && value <= 100, 0, Colors.blue),
+final int squaresPerRow = 10;
+final int squaresPerCol = 20;
+final fontStyle = const TextStyle(color: Colors.white, fontSize: 20);
+final randomGen = Random();
+String? _message; // the keyboard Listener
+var duration = const Duration(milliseconds: 500); // 1er valeur du timer
+var duration2 = const Duration(milliseconds: 500); // nouvelle valeur du timer quand le snake mange
+String MessageEnd = 'rien'; // message de fin
+var food = [0, 2];
+var direction = 'up'; // first direction 
+var direction2 = 'up'; // pour garder en mémoire la derniére direction
+var randomNumber= 0;
+var snake = [
+  [0, 1],
+  [0, 0]
 ];
+List<Effect> boule = [ // les différent types de boule
+Effect((int value) => value >=0 && value <= 20, [() => add(direction2, snake)], Colors.red),
+Effect((int value) => value >20 && value <= 40, [() => duration2 = duration2+const Duration(milliseconds: 30)], Colors.orange),
+Effect((int value) => value >40 && value <= 60, [() => duration2 = duration2*0.95], Colors.white),
+Effect((int value) => value >60 && value <= 100, [() => print('')], Colors.blue),
+];
+
+void add(directionf, List<List<int>> snake) { // fonction pour ajouter 1 de taille au snake
+  if (directionf == 'up') {
+    snake.insert(0, [snake.first[0], snake.first[1] - 1]);
+  }
+  if (directionf == 'down') {
+    snake.insert(0, [snake.first[0], snake.first[1] + 1]);
+  }
+  if (direction2 == 'left') {
+    snake.insert(0, [snake.first[0]-1, snake.first[1]]);
+  }
+  if (direction2 == 'right') {
+    snake.insert(0, [snake.first[0]+1, snake.first[1]]);
+  }
+}
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized(); // initialisation
@@ -100,38 +130,6 @@ class SnakeGame extends StatefulWidget {
 }
 
 class _SnakeGameState extends State<SnakeGame> {
-  final int squaresPerRow = 10;
-  final int squaresPerCol = 20;
-  final fontStyle = const TextStyle(color: Colors.white, fontSize: 20);
-  final randomGen = Random();
-  String? _message; // the keyboard Listener
-  var duration = const Duration(milliseconds: 500); // 1er valeur du timer
-  var duration2 = const Duration(milliseconds: 500); // nouvelle valeur du timer quand le snake mange
-  String MessageEnd = 'rien'; // message de fin
-  var snake = [
-    [0, 1],
-    [0, 0]
-  ];
-  var food = [0, 2];
-  var direction = 'up'; // first direction 
-  var direction2 = 'up'; // pour garder en mémoire la derniére direction
-  var randomNumber= 0;
-
-  void add(directionf, List<List<int>> snake) { // fonction pour ajouter 1 de taille au snake
-    if (directionf == 'up') {
-      snake.insert(0, [snake.first[0], snake.first[1] - 1]);
-    }
-    if (directionf == 'down') {
-      snake.insert(0, [snake.first[0], snake.first[1] + 1]);
-    }
-    if (direction2 == 'left') {
-      snake.insert(0, [snake.first[0]-1, snake.first[1]]);
-    }
-    if (direction2 == 'right') {
-      snake.insert(0, [snake.first[0]+1, snake.first[1]]);
-    }
-  }
-
 
   void startGame() {
     snake = [ // Snake head
@@ -224,16 +222,8 @@ class _SnakeGameState extends State<SnakeGame> {
         duration2 = duration2 * (0.8 + randomGen.nextDouble() * (0.95 - 0.8)); // speed increase about 10 %
         }
         boule.forEach((effect) {
-        if (effect.condition(randomNumber)) {// effect.eat l'effect est jouer si la condition est bonne
-          if (effect.eat==1) { // premier effect : on mange 2 fois
-            add(direction2, snake);
-          }
-          if (effect.eat==2) { // deuxième effect : on va moins vite
-            duration2 = duration2+const Duration(milliseconds: 40);
-          }         
-          if (effect.eat==3) { // deuxième effect : on va encore plus vite
-            duration2 = duration2*0.9;
-          }
+        if (effect.testCondition(randomNumber)) {
+          effect.executeEat();
         }
       });
       randomNumber = change();
@@ -368,6 +358,7 @@ class _SnakeGameState extends State<SnakeGame> {
     }
   }
 
+  
   Widget build(BuildContext context) {
       return Scaffold(
         backgroundColor: Colors.black,
@@ -540,12 +531,11 @@ class Effect {
 
   Effect(this.condition,this.eat,this.color);
 
-  getCondition() {
-    return condition;
+  bool testCondition(int value) {
+    return condition(value);
   }
 
-  getEat() {
-    return eat;
+  void executeEat() {
+    eat.forEach((f) => f());
   }
 }
-
