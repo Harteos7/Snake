@@ -1,16 +1,12 @@
-# snake_android
+Bonjour et bien venue dans ce github
 
-A new Flutter project.
+Ce que vous trouverais ici est un projet flutter fais pour ma 2eme année du BTS SIO option SLAM
+IL existe plusieurs branches : 
+    - main pour le code principale pour toutes les plateformes sauf Windows
+    - exe pour un exécutable bureau Windows
+    - apk pour télécharger un apk
+    - master pour le code du projet version Windows
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Il s’agit d'un Snake avec plusieurs fonctionnalités :
+Connexion à firebase pour enregistrer son score par rapport à sa plateforme
+Gestion du jeu snake
