@@ -1,3 +1,5 @@
+import 'package:firedart/generated/google/protobuf/timestamp.pb.dart';
+
 import 'main.dart';
 import 'package:tuple/tuple.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +22,7 @@ class Enregistrer extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final paddingSize = screenWidth / 6;
+    final now = DateTime.now();
     return Scaffold(
       body: Center(
         child: Padding (
@@ -83,6 +86,7 @@ class Enregistrer extends StatelessWidget {
                         await scoreCollection.add({
                           'name': name,
                           'score': score,
+                          'myTimestamp': now,
                         });
                         scoredef = false;
                         notseed = false;
