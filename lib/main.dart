@@ -216,9 +216,8 @@ class _SnakeGameState extends State<SnakeGame> {
       if ((snake.first[0] != food[0] || snake.first[1] != food[1])) {
         snake.removeLast(); // function to lose weight
       }
-
-      // vérification pour food et effect
-      if (snake.first[0] == food[0] && snake.first[1] == food[1]) {
+      else 
+      { // vérification pour food et effect
         createFood(); // we multiply the bread
         if ((snake.length - 2)<20) {
         duration2 = duration2 * (0.8 + randomGen.nextDouble() * (0.95 - 0.8)); // speed increase about 10 %
