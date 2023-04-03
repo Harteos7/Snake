@@ -18,7 +18,7 @@ class Enregistrer extends StatelessWidget {
   var name;
   final TextEditingController _nameController = TextEditingController();
 
-    @override
+  @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final paddingSize = screenWidth / 6;

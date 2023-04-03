@@ -19,6 +19,7 @@ TargetPlatform platform = defaultTargetPlatform; // savoir sur qu'elle plateform
 var appop;
 var rng = Random();
 bool useRawKeyboard = true;
+DateTime selectedDate = DateTime(2023, 04, 03); //date pour l'event
 
 List<Effect> boule = [ // les différent types de boule
   Effect((int value) => value >0 && value <= 20, 1, Colors.red),
@@ -48,7 +49,7 @@ void main() async {
     print('dead network');
     reseau = false;
   }  
-  runApp(const MyApp()); 
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -187,7 +188,7 @@ class _SnakeGameState extends State<SnakeGame> {
       { // vérification pour food et effect
         createFood(); // we multiply the bread
         if ((snake.length - 2)<20) {
-        duration2 = duration2 * (0.8 + randomGen.nextDouble() * (0.95 - 0.8)); // speed increase about 10 %
+        duration2 = duration2 * (0.8 + randomGen.nextDouble() * (0.95 - 0.8)); // speed increase about 15 %
         }
         boule.forEach((effect) {
         if (effect.condition(randomNumber)) {// effect.eat l'effect est jouer si la condition est bonne
@@ -195,7 +196,7 @@ class _SnakeGameState extends State<SnakeGame> {
             add(direction2, snake);
           }
           if (effect.eat==2) { // deuxième effect : on va moins vite
-            duration2 = duration2+const Duration(milliseconds: 10);
+            duration2 = duration2+const Duration(milliseconds: 40);
           }         
           if (effect.eat==3) { // deuxième effect : on va encore plus vite
             duration2 = duration2*0.9;
@@ -443,7 +444,7 @@ class _SnakeGameState extends State<SnakeGame> {
                             var result = snake.length - 2;
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => Enregistrer(score: result,test: test,scoredef: scoredef,scoreCollection: firedart.Firestore.instance.collection('TargetPlatform.windows'),)),
+                              MaterialPageRoute(builder: (context) => Enregistrer(score: result,test: test,scoredef: scoredef,scoreCollection: firedart.Firestore.instance.collection(platform.toString()),)),
                             );
                           } 
                         }
@@ -467,8 +468,8 @@ class _SnakeGameState extends State<SnakeGame> {
                           }
                           var name1;
                           var score1;
-                          final firedart.CollectionReference scoreCollection = firedart.Firestore.instance.collection('TargetPlatform.windows'); // get the reference to the 'score' collection
-                          var documents = await scoreCollection.limit(7).get(); // retrieve all documents in the collection
+                          firedart.CollectionReference scoreCollection = firedart.Firestore.instance.collection(platform.toString()); // get the reference to the 'score' collection
+                          var documents = await scoreCollection.limit(7).orderBy(descending: true, 'score').get(); // retrieve all documents in the collection
                           List<Tuple2<String, int>> scores = [];
 
                           for (var doc in documents) {
