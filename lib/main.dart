@@ -467,8 +467,6 @@ class _SnakeGameState extends State<SnakeGame> {
                           }
                           var name1;
                           var score1;
-                          List users = [name1='god', score1= 100];
-                          users.clear(); // on vide les users puis on les récupérer
                           final firedart.CollectionReference scoreCollection = firedart.Firestore.instance.collection('TargetPlatform.windows'); // get the reference to the 'score' collection
                           var documents = await scoreCollection.limit(7).get(); // retrieve all documents in the collection
                           List<Tuple2<String, int>> scores = [];
