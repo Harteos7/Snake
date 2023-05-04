@@ -318,10 +318,6 @@ class _SnakeGameState extends State<SnakeGame> {
     }
     bool rick = false;
 
-    if (MessageEnd == 'Ha ?') {
-      rick = true;
-    }
-
     showDialog(
       context: context,
       builder: (BuildContext context) {
