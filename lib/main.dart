@@ -499,9 +499,12 @@ class _SnakeGameState extends State<SnakeGame> {
                       onPressed: () {
                         if (isPlaying) {
                           isPlaying = false;
-                        } else {
+                        }  else {
                           notseed = true;
-                          startGame();
+                          // Add a delay of 1.5 seconds before starting the game
+                          Future.delayed(Duration(milliseconds: 150), () {
+                            startGame();
+                          });
                         } 
                       }
                     ),
