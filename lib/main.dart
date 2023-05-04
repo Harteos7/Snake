@@ -502,7 +502,7 @@ class _SnakeGameState extends State<SnakeGame> {
                         }  else {
                           notseed = true;
                           // Add a delay of 1.5 seconds before starting the game
-                          Future.delayed(Duration(milliseconds: 150), () {
+                          Future.delayed(Duration(milliseconds: 50), () {
                             startGame();
                           });
                         } 
