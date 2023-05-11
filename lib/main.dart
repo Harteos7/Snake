@@ -41,6 +41,9 @@ String MessageEnd = 'rien'; // message de fin
 final AssetsAudioPlayer audioPlayer = AssetsAudioPlayer(); // audio
 bool isPlayingS = false;
 String song ='';
+// "Call to Adventure" Kevin MacLeod (incompetech.com)
+// Licensed under Creative Commons: By Attribution 4.0 License
+// http://creativecommons.org/licenses/by/4.0
 
 List<Effect> boule = [ // les différent types de boule
 Effect((int value) => value >0 && value <= 20, [() => add(direction2, snake)], Colors.red), // le rouge ne peux pas apparaître dans les coins 
