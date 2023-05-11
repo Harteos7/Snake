@@ -278,10 +278,12 @@ class _SnakeGameState extends State<SnakeGame> {
       || snake.first[0] < 0
       || snake.first[0] >= squaresPerRow
     ) {
+      if (isPlayingS == false) {playAudio('assets/dead.mp3');} else {stopAudio();playAudio('assets/dead.mp3');}
       return true;
     }
 
     if (snake.length-2 <0) {
+      if (isPlayingS == false) {playAudio('assets/dead.mp3');} else {stopAudio();playAudio('assets/dead.mp3');}
       return true;
     }
 
