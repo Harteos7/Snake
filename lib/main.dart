@@ -309,8 +309,6 @@ class _SnakeGameState extends State<SnakeGame> {
     }
     if ((snake.length - 2) <= 5 && (snake.length - 2) > 0) {// message de fin
       MessageEnd = 'Pas ouf ouf';
-            rick = true;
-      rick2 = true;
     }
     if ((snake.length - 2) <= 10 && (snake.length - 2) > 5) {// message de fin
       MessageEnd = 'ca va';      
