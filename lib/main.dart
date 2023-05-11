@@ -526,7 +526,7 @@ class _SnakeGameState extends State<SnakeGame> {
                           notseed = true;
                           // Add a delay of 1.5 seconds before starting the game
                           Future.delayed(Duration(milliseconds: 75), () {
-                            if (isPlayingS == false) {playAudio('assets/son.mp3',0.5);} else {stopAudio();playAudio('assets/son.mp3',0.5);}
+                            if (isPlayingS == false) {playAudio('assets/son.mp3',1);} else {stopAudio();playAudio('assets/son.mp3',1);}
                             startGame();
                           });
                         } 
