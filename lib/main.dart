@@ -287,6 +287,7 @@ class _SnakeGameState extends State<SnakeGame> {
 
     for(var i=1; i < snake.length; ++i) { // Check that the snake still has weight
       if (snake[i][0] == snake.first[0] && snake[i][1] == snake.first[1]) {
+        if (isPlayingS == false) {playAudio('assets/dead.mp3');} else {stopAudio();playAudio('assets/dead.mp3');}
         return true;
       }
     }
