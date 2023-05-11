@@ -242,7 +242,7 @@ class _SnakeGameState extends State<SnakeGame> {
       { // vérification pour food et effect
         createFood(); // we multiply the bread
         if ((snake.length - 2)<26) {
-        duration2 = duration2 * (0.8 + randomGen.nextDouble() * (0.95 - 0.8)); // speed increase about 10 %
+        duration2 = duration2 * (0.8 + randomGen.nextDouble() * (0.95 - 0.8)); // speed increase about 15 %
         }
         boule.forEach((effect) {
         if (effect.testCondition(randomNumber)) {
@@ -267,7 +267,7 @@ class _SnakeGameState extends State<SnakeGame> {
     boule.forEach((effect) {
       if (effect.testCondition(randomNumber)) {
         if (effect.color.toString()=='MaterialColor(primary value: Color(0xfff44336))') { // on vérifie que c'est pas rouge
-          if (food == [0,0] || food == [squaresPerRow-1,squaresPerCol-1] || food == [0,squaresPerCol-1] || food == [squaresPerRow-1,0] ) {
+          if (food == [0,0] || food == [squaresPerRow-1,squaresPerCol-1] || food == [0,squaresPerCol-1] || food == [squaresPerRow-1,0] ) {// si c'est dans les coins on remplace
             createFood();
           }
         }
@@ -286,14 +286,14 @@ class _SnakeGameState extends State<SnakeGame> {
       return true;
     }
 
-    if (snake.length-2 <0) {
+    if (snake.length-2 <0) { // on vérifie que le snake n'a pas rapetisser
       if (isPlayingS == false) {playAudio('assets/dead.mp3',1.0);} else {stopAudio();playAudio('assets/dead.mp3',1.0);}
       return true;
     }
 
-    for(var i=1; i < snake.length; ++i) { // Check that the snake still has weight
+    for(var i=1; i < snake.length; ++i) { // on vérifie que le snake ne s’est pas heurter
       if (snake[i][0] == snake.first[0] && snake[i][1] == snake.first[1]) {
-        if (isPlayingS == false) {playAudio('assets/dead.mp3',1.0);} else {stopAudio();playAudio('assets/dead.mp3',1.0);}
+        if (isPlayingS == false) {playAudio('assets/dead2.mp3',1.0);} else {stopAudio();playAudio('assets/dead2.mp3',1.0);}
         return true;
       }
     }
@@ -529,7 +529,7 @@ class _SnakeGameState extends State<SnakeGame> {
                           notseed = true;
                           // Add a delay of 1.5 seconds before starting the game
                           Future.delayed(Duration(milliseconds: 75), () {
-                            if (isPlayingS == false) {playAudio('assets/son.mp3',1);} else {stopAudio();playAudio('assets/son.mp3',1);}
+                            if (isPlayingS == false) {playAudio('assets/son.mp3',0.75);} else {stopAudio();playAudio('assets/son.mp3',0.75);}
                             startGame();
                           });
                         } 
