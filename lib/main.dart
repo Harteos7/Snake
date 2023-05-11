@@ -8,7 +8,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:url_launcher/url_launcher_string.dart';
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'Pages1.dart';
 
 const apiKey = 'AIzaSyBUiuITIqoTjhhIKaUfyvzaGgqREvMoGow';
@@ -38,6 +38,7 @@ var snake = [
 TargetPlatform platform = defaultTargetPlatform; // savoir sur qu'elle plateform on est
 String? _message; // the keyboard Listener
 String MessageEnd = 'rien'; // message de fin
+final AssetsAudioPlayer audioPlayer = AssetsAudioPlayer(); // audio
 
 List<Effect> boule = [ // les différent types de boule
 Effect((int value) => value >0 && value <= 20, [() => add(direction2, snake)], Colors.red), // le rouge ne peux pas apparaître dans les coins 
@@ -246,7 +247,7 @@ class _SnakeGameState extends State<SnakeGame> {
     }
     boule.forEach((effect) {
       if (effect.testCondition(randomNumber)) {
-        if (effect.color.toString()=='MaterialColor(primary value: Color(0xfff44336))') {
+        if (effect.color.toString()=='MaterialColor(primary value: Color(0xfff44336))') { // on vérifie que c'est pas rouge
           if (food == [0,0] || food == [squaresPerRow-1,squaresPerCol-1] || food == [0,squaresPerCol-1] || food == [squaresPerRow-1,0] ) {
             createFood();
           }
@@ -283,6 +284,8 @@ class _SnakeGameState extends State<SnakeGame> {
     duration2 = const Duration(milliseconds: 500);
     scoredef = true;
     isPlaying = false;
+    bool rick = false;
+    bool rick2 = false;
     if (snake.length - 2 == -1) { // message de fin
       MessageEnd = 'il semblerait que le principe de cette boule soit de te faire rétrécir';
     }
@@ -293,7 +296,7 @@ class _SnakeGameState extends State<SnakeGame> {
       MessageEnd = 'Pas ouf ouf';
     }
     if ((snake.length - 2) <= 10 && (snake.length - 2) > 5) {// message de fin
-      MessageEnd = 'ca va';
+      MessageEnd = 'ca va';      
     }
     if ((snake.length - 2) <= 15 && (snake.length - 2) > 10) {// message de fin
       MessageEnd = 'Bravo tu es tout à fait commun';
@@ -303,9 +306,12 @@ class _SnakeGameState extends State<SnakeGame> {
     }
     if ((snake.length - 2) <= 25 && (snake.length - 2) > 20) {// message de fin
       MessageEnd = 'Ha ?';
+      rick = true;
     }
     if ((snake.length - 2) <= 30 && (snake.length - 2) > 25) {// message de fin
       MessageEnd = 'Snake/20';
+      rick = true;
+      rick2 = true;
     }
     if ((snake.length - 2) <= 35 && (snake.length - 2) > 30) {// message de fin
       MessageEnd = 'Tu passes beaucoup de temps sur mon snake';
@@ -316,7 +322,6 @@ class _SnakeGameState extends State<SnakeGame> {
     if ((snake.length - 2) > 40) {// message de fin
       MessageEnd = 'GG';
     }
-    bool rick = false;
 
     showDialog(
       context: context,
@@ -333,20 +338,27 @@ class _SnakeGameState extends State<SnakeGame> {
               ),
               const SizedBox(height: 8),
               rick ?
+              // ignore: dead_code
               RichText(
                 text: TextSpan(
                   children: [
                     const TextSpan(text: 'rien à voir : '),
+                    rick2 ?
+                    // ignore: dead_code
                     TextSpan(
                       text: 'clique pas !',
                       style: const TextStyle(color: Colors.blue),
                       recognizer: TapGestureRecognizer()
-                        ..onTap = () {
-                          if (MessageEnd == 'Ha ?') {
-                          launchUrlString('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
-                          }
+                        ..onTap = () async {
+                            audioPlayer.open(
+                              Audio('assets/test.mp3'),
+                              autoStart: true,
+                              showNotification: true,
+                            );
                         },
-                    ),
+                    ):
+                    // ignore: dead_code
+                    const TextSpan(),
                   ],
                 ),
               ):

@@ -39,7 +39,7 @@ dependencies:
   connectivity_plus: ^3.0.3
   fluent_ui: ^4.4.1
   cloud_firestore: ^4.4.4
-  url_launcher: ^6.0.10
+  assets_audio_player: ^3.0.6
 
 dev_dependencies:
   flutter_test:
@@ -57,6 +57,8 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
+  assets:
+    - assets/test.mp3
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
