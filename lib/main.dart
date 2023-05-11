@@ -39,6 +39,8 @@ TargetPlatform platform = defaultTargetPlatform; // savoir sur qu'elle plateform
 String? _message; // the keyboard Listener
 String MessageEnd = 'rien'; // message de fin
 final AssetsAudioPlayer audioPlayer = AssetsAudioPlayer(); // audio
+bool isPlayingS = false;
+String song ='';
 
 List<Effect> boule = [ // les différent types de boule
 Effect((int value) => value >0 && value <= 20, [() => add(direction2, snake)], Colors.red), // le rouge ne peux pas apparaître dans les coins 
@@ -61,6 +63,19 @@ void add(directionf, List<List<int>> snake) { // fonction pour ajouter 1 de tail
     snake.insert(0, [snake.first[0]+1, snake.first[1]]);
   }
 }
+  void playAudio(String song) {
+    audioPlayer.open(
+      Audio(song),
+      autoStart: true,
+      showNotification: true,
+    );
+    isPlayingS = true;
+  }
+
+  void stopAudio() {
+    audioPlayer.stop();
+    isPlayingS = false;
+  }
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized(); // initialisation
@@ -294,6 +309,8 @@ class _SnakeGameState extends State<SnakeGame> {
     }
     if ((snake.length - 2) <= 5 && (snake.length - 2) > 0) {// message de fin
       MessageEnd = 'Pas ouf ouf';
+            rick = true;
+      rick2 = true;
     }
     if ((snake.length - 2) <= 10 && (snake.length - 2) > 5) {// message de fin
       MessageEnd = 'ca va';      
@@ -349,12 +366,8 @@ class _SnakeGameState extends State<SnakeGame> {
                       text: 'clique pas !',
                       style: const TextStyle(color: Colors.blue),
                       recognizer: TapGestureRecognizer()
-                        ..onTap = () async {
-                            audioPlayer.open(
-                              Audio('assets/test.mp3'),
-                              autoStart: true,
-                              showNotification: true,
-                            );
+                        ..onTap = () {
+                          if (isPlayingS == false) {playAudio('assets/test.mp3');} else {stopAudio();playAudio('assets/test.mp3');}
                         },
                     ):
                     // ignore: dead_code
