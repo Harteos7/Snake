@@ -60,6 +60,7 @@ flutter:
   assets:
     - assets/test.mp3
     - assets/dead.mp3
+    - assets/son.mp3
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

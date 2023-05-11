@@ -63,11 +63,12 @@ void add(directionf, List<List<int>> snake) { // fonction pour ajouter 1 de tail
     snake.insert(0, [snake.first[0]+1, snake.first[1]]);
   }
 }
-  void playAudio(String song) {
+  void playAudio(String song,double volume) {
     audioPlayer.open(
       Audio(song),
       autoStart: true,
       showNotification: true,
+      volume: volume, // Utilisez la valeur du volume passé en paramètre
     );
     isPlayingS = true;
   }
@@ -278,18 +279,18 @@ class _SnakeGameState extends State<SnakeGame> {
       || snake.first[0] < 0
       || snake.first[0] >= squaresPerRow
     ) {
-      if (isPlayingS == false) {playAudio('assets/dead.mp3');} else {stopAudio();playAudio('assets/dead.mp3');}
+      if (isPlayingS == false) {playAudio('assets/dead.mp3',1.0);} else {stopAudio();playAudio('assets/dead.mp3',1.0);}
       return true;
     }
 
     if (snake.length-2 <0) {
-      if (isPlayingS == false) {playAudio('assets/dead.mp3');} else {stopAudio();playAudio('assets/dead.mp3');}
+      if (isPlayingS == false) {playAudio('assets/dead.mp3',1.0);} else {stopAudio();playAudio('assets/dead.mp3',1.0);}
       return true;
     }
 
     for(var i=1; i < snake.length; ++i) { // Check that the snake still has weight
       if (snake[i][0] == snake.first[0] && snake[i][1] == snake.first[1]) {
-        if (isPlayingS == false) {playAudio('assets/dead.mp3');} else {stopAudio();playAudio('assets/dead.mp3');}
+        if (isPlayingS == false) {playAudio('assets/dead.mp3',1.0);} else {stopAudio();playAudio('assets/dead.mp3',1.0);}
         return true;
       }
     }
@@ -368,7 +369,7 @@ class _SnakeGameState extends State<SnakeGame> {
                       style: const TextStyle(color: Colors.blue),
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
-                          if (isPlayingS == false) {playAudio('assets/test.mp3');} else {stopAudio();playAudio('assets/test.mp3');}
+                          if (isPlayingS == false) {playAudio('assets/test.mp3',1.0);} else {stopAudio();playAudio('assets/test.mp3',1.0);}
                         },
                     ):
                     // ignore: dead_code
@@ -525,6 +526,7 @@ class _SnakeGameState extends State<SnakeGame> {
                           notseed = true;
                           // Add a delay of 1.5 seconds before starting the game
                           Future.delayed(Duration(milliseconds: 75), () {
+                            if (isPlayingS == false) {playAudio('assets/son.mp3',0.2);} else {stopAudio();playAudio('assets/son.mp3',0.2);}
                             startGame();
                           });
                         } 
