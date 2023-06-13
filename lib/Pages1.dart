@@ -82,9 +82,10 @@ class Enregistrer extends StatelessWidget {
                         name = _nameController.text;
                         if (name != '') {
                         // Ajouter des données
-                        firestore.collection(platform.toString()).add({
+                        firestore.collection('score').add({
                           'name': name,
                           'score': score,
+                          'platform': platform.toString(),
                           "timestamp": Timestamp.now(),
                         });
                         scoredef = false;
@@ -129,27 +130,58 @@ class Voir extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: ListView(children: <Widget>[
-            const Center(
-                child: Text(
+      body: ListView(
+        children: <Widget>[
+          const Center(
+            child: Text(
               'High score',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            )),
-            DataTable(
-              columns: const [
-                DataColumn(label: Text('Name')),
-                DataColumn(label: Text('score')),
-              ],
-            rows:  [
-              for (var doc in sortedData)
-              if (doc != null)
-                DataRow(cells: [
-                  DataCell(Text(doc['name'].toString())),
-                  DataCell(Text(doc['score'].toString())),
-                ]),
-             ],
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.red), 
             ),
-          ]),
+          ),
+          DataTable(
+            columns: const [
+              DataColumn(label: Text('Name')),
+              DataColumn(label: Text('score')),
+            ],
+            rows: [
+              for (var doc in sortedData)
+                if (doc != null) // pour vérifier que il existe des données
+                  if (doc['platform'].toString() == platform.toString()) // on trie pour avoir la même plateform
+                    DataRow(
+                      cells: [
+                        DataCell(Text(doc['name'].toString())),
+                        DataCell(Text(doc['score'].toString())),
+                      ],
+                    ),
+            ],
+          ),
+          const SizedBox(height: 200.0),
+          const Center(
+            child: Text(
+              'Global High Score',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.amberAccent),
+            ),
+          ),
+          DataTable(
+            columns: const [
+              DataColumn(label: Text('Name')),
+              DataColumn(label: Text('Platform')),
+              DataColumn(label: Text('Score')),
+            ],
+            rows: [
+              for (var doc in sortedData)
+                if (doc != null)
+                  DataRow(
+                    cells: [
+                      DataCell(Text(doc['name'].toString())),
+                      DataCell(Text(doc['platform'].toString())),
+                      DataCell(Text(doc['score'].toString())),
+                    ],
+                  ),
+            ],
+          ),
+        ],
+      ),
       floatingActionButton: ElevatedButton(
         onPressed: () {
           Navigator.pop(context);

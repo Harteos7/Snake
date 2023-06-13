@@ -52,6 +52,10 @@ Effect((int value) => value >40 && value <= 60, [() => duration2 = duration2*0.9
 Effect((int value) => value >60 && value <= 100, [() => print('')], Colors.blue),
 ];
 
+List<Mhelp> mhelp =[
+Mhelp(5,'5 ? incroyable (non)'),Mhelp(7,'7 ? pas mal'),Mhelp(10,'10 ? ca va'),Mhelp(12,'12 ? ok'),Mhelp(15,'15 ? incroyable'),
+];
+
 void add(directionf, List<List<int>> snake) { // fonction pour ajouter 1 de taille au snake
   if (directionf == 'up') {
     snake.insert(0, [snake.first[0], snake.first[1] - 1]);
@@ -183,7 +187,7 @@ class _SnakeGameState extends State<SnakeGame> {
       // print(snake); // debug
       // print(duration); // debug
       // print(duration2); // debug
-      // print('direction =' + direction); // debug
+      // print('direction =' + direction); // debug 
 
       if (duration != duration2) {
         if ( isPlaying = true ) {
@@ -241,7 +245,7 @@ class _SnakeGameState extends State<SnakeGame> {
       else 
       { // vérification pour food et effect
         createFood(); // we multiply the bread
-        if ((snake.length - 2)<26) {
+        if ((snake.length - 2)<25) { // à 25 de score le snake ne gagne plus de vitesse
         duration2 = duration2 * (0.8 + randomGen.nextDouble() * (0.95 - 0.8)); // speed increase about 15 %
         }
         boule.forEach((effect) {
@@ -250,6 +254,39 @@ class _SnakeGameState extends State<SnakeGame> {
         }
       });
       randomNumber = change();
+
+      mhelp.forEach((help) {
+      help.afficherM(context, snake.length - 2);
+      });
+      
+      // if (snake.length - 2 == 5) {  // si le score est de 5 on félicite le joueur
+      //   ScaffoldMessenger.of(context).showSnackBar(
+      //     const SnackBar(
+      //       content: Text('5 ? incroyable !'),
+      //     ),
+      //   ); 
+      // }
+      // if (snake.length - 2 == 7) {  // si le score est de 7 on félicite le joueur
+      //   ScaffoldMessenger.of(context).showSnackBar(
+      //     const SnackBar(
+      //       content: Text('7 ? incroyable !'),
+      //     ),
+      //   ); 
+      // } 
+      // if (snake.length - 2 == 10) {  // si le score est de 10 on félicite le joueur
+      //   ScaffoldMessenger.of(context).showSnackBar(
+      //     const SnackBar(
+      //       content: Text('10 ? incroyable !'),
+      //     ),
+      //   ); 
+      // } 
+      // if (snake.length - 2 == 12) {  // si le score est de 12 on félicite le joueur
+      //   ScaffoldMessenger.of(context).showSnackBar(
+      //     const SnackBar(
+      //       content: Text('12 ? incroyable !'),
+      //     ),
+      //   ); 
+      // }  
       }
     });
   }
@@ -573,11 +610,11 @@ class _SnakeGameState extends State<SnakeGame> {
                         final firestore = FirebaseFirestore.instance;
 
                         // Récupérer les données triées de Firestore
-                        var snapshot = await firestore.collection(platform.toString()).orderBy('score', descending: true).limit(7).get();
+                        var snapshot = await firestore.collection('score').orderBy('score', descending: true).limit(10).get();
 
                         // Stocker les données triées dans une liste de Map trier par la palteforme
                         List<Map<String, dynamic>?> sortedData = snapshot.docs.map((doc) {
-                          return {'name': doc['name'], 'score': doc['score']};
+                          return {'name': doc['name'],'platform': doc['platform'], 'score': doc['score']};
                         }).toList();
 
                         Navigator.push(
@@ -610,5 +647,25 @@ class Effect {
 
   void executeEat() {
     eat.forEach((f) => f());
+  }
+}
+
+class Mhelp {
+  var condition;
+  var messageH;
+
+
+  Mhelp(this.condition,this.messageH);
+
+  void afficherM(context,snake) {
+
+    if (snake == condition) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(messageH),
+      ),
+    );
+    }
+
   }
 }
