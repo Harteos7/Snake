@@ -134,7 +134,7 @@ class Voir extends StatelessWidget {
         children: <Widget>[
           const Center(
             child: Text(
-              'High score',
+              'High score', // par rapport à la plateform utiliser
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.red), 
             ),
           ),
@@ -158,7 +158,7 @@ class Voir extends StatelessWidget {
           const SizedBox(height: 200.0),
           const Center(
             child: Text(
-              'Global High Score',
+              'Global High Score', // tableau global permétant de voir la plateform utiliser pour réaliser ce score
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.amberAccent),
             ),
           ),

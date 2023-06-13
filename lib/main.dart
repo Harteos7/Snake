@@ -612,7 +612,7 @@ class _SnakeGameState extends State<SnakeGame> {
                         // Récupérer les données triées de Firestore
                         var snapshot = await firestore.collection('score').orderBy('score', descending: true).limit(10).get();
 
-                        // Stocker les données triées dans une liste de Map trier par la palteforme
+                        // Stocker les données triées dans une liste de Map qui sera trier par rapport à la palteforme
                         List<Map<String, dynamic>?> sortedData = snapshot.docs.map((doc) {
                           return {'name': doc['name'],'platform': doc['platform'], 'score': doc['score']};
                         }).toList();
@@ -658,7 +658,6 @@ class Mhelp {
   Mhelp(this.condition,this.messageH);
 
   void afficherM(context,snake) {
-
     if (snake == condition) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
